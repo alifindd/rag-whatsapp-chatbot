@@ -1,10 +1,10 @@
-# 🤖 RAG Customer Service Chatbot — WhatsApp + FastAPI + LLM
+# RAG Customer Service Chatbot — WhatsApp + FastAPI + LLM
 
 A production-ready customer service chatbot that answers questions from your own data using a custom RAG (Retrieval-Augmented Generation) pipeline. Integrated with WhatsApp via Twilio.
 
 ---
 
-## 📸 Demo
+## Demo
 
 > Customer sends a WhatsApp message → Bot retrieves relevant FAQ context → LLM generates a friendly, natural response → Reply sent back to WhatsApp
 
@@ -12,7 +12,7 @@ A production-ready customer service chatbot that answers questions from your own
 
 ---
 
-## ✨ Features
+## Features
 
 - **Custom RAG Pipeline** — semantic search over your FAQ data using sentence embeddings + cosine similarity
 - **WhatsApp Integration** — real-time responses via Twilio WhatsApp API
@@ -22,7 +22,7 @@ A production-ready customer service chatbot that answers questions from your own
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -35,7 +35,7 @@ A production-ready customer service chatbot that answers questions from your own
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 rag-store-chatbot/
@@ -57,7 +57,7 @@ rag-store-chatbot/
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 ```
 User Message (WhatsApp)
@@ -79,7 +79,7 @@ Return TwiML response → WhatsApp reply
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Python 3.9+
@@ -198,7 +198,7 @@ pydantic
 
 ---
 
-## 🗺️ Roadmap
+## Future Improvements
 
 - [ ] Add conversation history (multi-turn)
 - [ ] Deploy to cloud (Railway / Render)
@@ -212,7 +212,7 @@ pydantic
 
 **Alifin** — AI Developer
 - GitHub: [@alifindd](https://github.com/alifindd)
-- Upwork: [your-upwork-profile-link]
+- Upwork: [Alifin D.](https://www.upwork.com/freelancers/~01faee71cbfcec5885?mp_source=share)
 
 ---
 
