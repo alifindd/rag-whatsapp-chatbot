@@ -8,7 +8,7 @@ A production-ready customer service chatbot that answers questions from your own
 
 > Customer sends a WhatsApp message → Bot retrieves relevant FAQ context → LLM generates a friendly, natural response → Reply sent back to WhatsApp
 
-![Demo](images/demo_chat.png)
+![Demo](demo/demo_chat.png)
 
 ---
 
