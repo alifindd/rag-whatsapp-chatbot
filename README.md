@@ -138,7 +138,7 @@ Send a message to your Twilio Sandbox WhatsApp number and the bot will reply. �
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -161,7 +161,7 @@ Send a message to your Twilio Sandbox WhatsApp number and the bot will reply. �
 
 ---
 
-## 📊 RAG Pipeline Details
+## RAG Pipeline Details
 
 - **Embedding Model**: `all-MiniLM-L6-v2` — lightweight, fast, and accurate for semantic search
 - **Similarity Metric**: Cosine similarity
@@ -170,7 +170,7 @@ Send a message to your Twilio Sandbox WhatsApp number and the bot will reply. �
 
 ---
 
-## 🔧 Customization
+## Customization
 
 ### Using your own FAQ data
 Replace `app/data/apparel_store_faq.csv` with your own CSV file. Required columns:
@@ -183,7 +183,7 @@ Edit the system prompt in `app/services/rag_service.py` → `generate_answer()` 
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 ```
 fastapi
