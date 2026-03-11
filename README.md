@@ -200,7 +200,7 @@ pydantic
 
 ## Future Improvements
 
-- [ ] Add conversation history (multi-turn)
+- [x] Add conversation history (multi-turn)
 - [ ] Deploy to cloud (Railway / Render)
 - [ ] Support image/document attachments
 - [ ] Admin dashboard for FAQ management
