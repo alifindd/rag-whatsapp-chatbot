@@ -22,6 +22,23 @@ with open(DATA_PATH, newline="", encoding="utf-8") as f:
 
 question_embed = model.encode(questions)
 
+conversation_history: dict[str, list] = {}
+
+def get_history(sender: str) -> list:
+  if sender not in conversation_history:
+    conversation_history[sender] = []
+  return conversation_history[sender]
+
+def update_history(sender: str, role: str, content: str):
+  if sender not in conversation_history:
+    conversation_history[sender] = []
+  conversation_history[sender].append({
+    "role":role,
+    "content":content
+  })
+  if len(conversation_history[sender]) > 10:
+    conversation_history[sender] = conversation_history[sender][-10:]
+  
 def retrieve_contexts(question:str, top_k:int = 3):
   user_embed = model.encode([question])
   similarities = cosine_similarity(user_embed, question_embed)[0]
@@ -33,45 +50,55 @@ def build_contexts(contexts: list[str]) -> str:
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-def generate_answer(question:str, contexts_str: str) -> str:
-  prompt = f"""
-  Kamu adalah admin bagian customer service di sebuah toko baju bernama TokoABC, sebagai customer service, kamu menjawab dengan jelas dan ramah.
+def generate_answer(question:str, contexts_str: str, sender: str):
+  history = get_history(sender)
+
+
+  system_prompt = f"""
+  Kamu adalah admin bagian customer service di sebuah toko baju bernama ApparelBC, sebagai customer service, kamu menjawab dengan ramah dan tidak singkat.
 
   Aturan: 
-  - Awali chat dengan sapaan ramah, seperti "Hai, Kak." dan semacamnya.
-  - Beri emoji saat chat untuk memberikan kesan friendly.
+  - Awali chat dengan sapaan ramah HANYA untuk pertama kali chat, jika sudah sapa sebelumnya TIDAK perlu sapa lagi, hanya jawab pertanyaan.
+  - Beri emoji yang sesuai saat chat untuk memberikan kesan friendly.
   - Jawab HANYA berdasarkan konteks informasi dibawah.
   - Jangan menambah informasi diluar konteks.
   - Parafrase informasi diperbolehkan, tapi tidak boleh sampai mengubah makna atau fakta yang ada.
-  - Jika jawaban tidak ditemukan, maka jawab tidak tahu, karena informasi belum tersedia dan pertanyaan akan dijawab oleh admin manusia.
-  - Akhiri jawaban dengan ucapan terima kasih jika diperlukan.
-  - Tambahkan note jawaban dikirm oleh bot.
+  - Jika jawaban tidak ditemukan, maka jawab tidak tahu. Dan jelaskan bahwa pertanyaan akan diteruskan dan  dijawab oleh admin manusia.
+  - Format jawaban dengan rapi, hanya gunakan 1 * di kanan dan kiri teks untuk meng-highligth kata penting.
+  
 
   Informasi konteks:
   {contexts_str}
-
-  Pertanyaan:
-  {question}
-
-  Jawaban:
   """
+
+  # Build messages with history
+  messages = [{"role": "system", "content": system_prompt}]
+  for msg in history:
+    messages.append({"role": msg["role"], "content": msg["content"]})
+ 
+  messages.append({"role": "user", "content": question})
   
   response = client.chat.completions.create(
     model="openai/gpt-oss-120b",
-    messages=[
-      {"role":"user", "content":prompt}
-    ],
+    messages=messages, # type: ignore
     temperature=0.5
   )
 
   content = response.choices[0].message.content
   assert content is not None
+
+  # Save history
+  update_history(sender, "user", question)
+  update_history(sender, "assistant", content)
+
+  print(history)
+
   return content
 
-def chat_with_rag(question):
+def chat_with_rag(question: str, sender: str = "default"):
   contexts = retrieve_contexts(question)
   contexts_str = build_contexts(contexts)
-  answer = generate_answer(question, contexts_str)
+  answer = generate_answer(question, contexts_str, sender)
 
   return answer
  

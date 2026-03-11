@@ -10,10 +10,10 @@ router = APIRouter()
 @router.post("/whatsapp")
 async def whatsapp_webhook(request: Request):
     form = await request.form()
-    incoming_msg = form.get("Body")
-    sender = form.get("From")
+    incoming_msg = str(form.get("Body", ""))
+    sender = str(form.get("From"))
 
-    answer = chat_with_rag(incoming_msg)
+    answer = chat_with_rag(incoming_msg, sender)
 
     resp = MessagingResponse()
     resp.message(answer)

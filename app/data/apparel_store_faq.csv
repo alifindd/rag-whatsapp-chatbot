@@ -32,3 +32,5 @@ question,answer,category
 "bisa beli lewat shopee?","Produk tersedia di marketplace Shopee, Lazada, dan TokoPedia","product"
 "bisa beli lewat Lazada?","Produk tersedia di marketplace Shopee, Lazada, dan TokoPedia","product"
 "bisa beli lewat TokoPedia?","Produk tersedia di marketplace Shopee, Lazada, dan TokoPedia","product"
+"batas garansinya berapa hari?","Garansi berlaku selama 7 hari terhitung setelah barang diterima.","product"
+"dapat garansi berapa hari?","Garansi berlaku selama 7 hari terhitung setelah barang diterima.","product"
