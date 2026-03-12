@@ -1,4 +1,4 @@
-# RAG Customer Service Chatbot — WhatsApp + FastAPI + LLM
+# RAG Customer Service Chatbot (WhatsApp + FastAPI + LLM)
 
 A production-ready customer service chatbot that answers questions from your own data using a custom RAG (Retrieval-Augmented Generation) pipeline. Integrated with WhatsApp via Twilio.
 
